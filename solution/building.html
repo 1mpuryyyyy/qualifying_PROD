@@ -12,33 +12,67 @@
     <form id="resume-form">
       <div>
         <label for="name">Имя:</label>
-        <input type="text" id="name" test-id="personal-info" name="name" required>
+        <input type="text" id="name" test-id="personal-info" name="name" placeholder="ФИО" required>
       </div>
+
       <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" test-id="personal-info" name="email">
+        <input type="email" id="email" test-id="personal-info" placeholder="example@gmail.com" name="email">
       </div>
+
       <div>
-        <label for="phone">Телефон:</label>
-        <input type="tel" id="phone" test-id="personal-info" name="phone" required>
+        <label for="telephone">Телефон:</label>
+        <input type="tel" id="telephone" test-id="personal-info" name="telephone"
+               data-mask="phone"
+               placeholder="+7(977)777-77-77"
+               minlength=16 maxlength=16   required/>
       </div>
-      <div>
-        <label for="summary">Краткое описание:</label>
-        <textarea id="summary" name="summary" rows="5" cols="40" required></textarea>
+
+      <div class="br"></div>
+
+      <div class="inputs" id="summary_div">
+        <label for="summary">Интересы:</label>
+        <input type='text' id="summary" name="summary" placeholder="Ваше хобби" required>
+        <button class="create">+</button>
+        <button class="delete">-</button>
       </div>
-      <div>
+
+      <div class="br"></div>
+
+      <div class="inputs" id="skills_div">
         <label for="skills">Навыки:</label>
-        <input type="text" id="skills" name="skills" placeholder="Например, HTML, CSS, JS" required>
+        <input type="text" id="skills" name="skills" placeholder="Ваш стек или умения" required>
+        <button class="create">+</button>
+        <button class="delete">-</button>
       </div>
-      <div>
+
+      <div class="br"></div>
+
+      <div id="education_div">
         <label for="education">Образование:</label>
-        <input type="text" id="education" name="education" placeholder="Например, МГУ, факультет математики" required>
+        <input type="text" id="education" name="education" placeholder="Перечислите все виды" required>
       </div>
+
+      <div class="br"></div>
+
       <div>
         <label for="experience">Опыт работы:</label>
-        <input type="text" id="experience" name="experience" placeholder="Например, Google, веб-разработчик, 2 года"
+        <input type="text" id="experience" name="experience" placeholder="Имя компании"
                required>
+        <div class="experience">
+          <label for="start">
+            Дата начала
+            <input type="date" id="start" name="start" placeholder="Дата начала" required>
+          </label>
+
+          <label for="end">
+            Дата окончания
+            <input type="date" id="end" name="end" placeholder="Дата окончания" required>
+          </label>
+
+        </div>
       </div>
+      <div class="br"></div>
       <div>
         <button type="submit" id="submit">Сохранить и просмотреть</button>
       </div>
@@ -50,7 +84,7 @@
   <div>
     <p id="name-display"></p>
     <p id="email-display"></p>
-    <p id="phone-display"></p>
+    <p id="telephone-display"></p>
     <p id="summary-display"></p>
     <p id="skills-display"></p>
     <p id="education-display"></p>
@@ -62,4 +96,6 @@
 </div>
 </body>
 <script src="index.js"></script>
+<script src="./components/imask.js"></script>
+<script src="./components/main.js"></script>
 </html>

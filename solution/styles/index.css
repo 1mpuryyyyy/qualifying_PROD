@@ -1,10 +1,41 @@
+:root{
+  --display-primary: flex;
+}
+
+#resume-form > * {
+    margin-top: 15px;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.build{
+  display: var(--display-primary);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 h1 {
   font-size: 28px;
 }
 .resume{
   display: none;
+}
+.experience{
+  display: var(--display-primary);
+  flex-direction: column;
+  margin: 2% 10% 2% 10%;
+}
+.experience > *{
+  margin: 2% 0 2% 0;
+}
+
+input[type="text"]{ padding: 0; line-height: 10px; }
+
+.br{
+  width: 90%;
+  border: 1px solid black;
+  margin: 0 5% 0 5%;
+
 }
