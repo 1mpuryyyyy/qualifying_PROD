@@ -1,49 +1,288 @@
-:root{
+:root {
   --display-primary: flex;
 }
 
-*, a, button, input, li {
+*, a, button, input, li, ul {
   box-sizing: border-box;
   text-decoration: none;
   margin: 0;
-}
-
-#resume-form > * {
-    margin-top: 15px;
-}
-.flex{
-  display: flex;
-}
-body {
+  padding: 0;
+  list-style-type: none;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.build{
+#resume-form > * {
+  margin-top: 15px;
+}
+
+.flex {
+  display: flex;
+}
+
+.build {
   display: var(--display-primary);
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 h1 {
   font-size: 28px;
 }
-.resume{
-  display: none;
-}
-.set_divs{
+
+.set_divs {
   display: var(--display-primary);
   flex-direction: column;
   margin: 0 10% 2% 10%;
 }
-.set_divs > *{
+
+.set_divs > * {
   margin: 2% 0 2% 0;
 }
 
-input[type="text"]{ padding: 0; line-height: 10px; }
+input[type="text"] {
+  padding: 0;
+  line-height: 10px;
+}
 
-.br{
+.br {
   width: 90%;
   border: 1px solid black;
   margin: 0 5% 0 5%;
 
+}
+
+/* resume page */
+li {
+  list-style: none;
+}
+
+.container-resume {
+  margin: 0 auto;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Страница резюме */
+
+.resume-page {
+  display: none;
+  visibility: hidden;
+}
+
+#div_resume {
+  display: none;
+  visibility: hidden
+}
+
+.left {
+  width: 100%;
+  max-width: 256px;
+  background: #6495ED;
+  padding: 16px;
+  padding-top: 14px;
+  padding-bottom: 0;
+  color: #ffffff;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.left__section--personal-data {
+  margin-top: 2px;
+  padding-top: 30px;
+}
+
+.fio-desc {
+  padding-top: 25px;
+  padding-bottom: 11px;
+}
+
+.left__section--interests {
+  margin-top: 14px;
+  padding-top: 17px;
+  padding-bottom: 14px;
+}
+
+.left__section--languages {
+  margin-top: 0px;
+  padding-top: 17px;
+  padding-bottom: 10px;
+}
+
+.left__section__title {
+  font-weight: 700;
+  font-size: 15.9px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ffffff;
+}
+
+.left__section__fem {
+  font-weight: 700;
+  font-size: 15.9px;
+}
+
+.personal-groups {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.personal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.personal-group h3 {
+  font-size: 13.3px;
+  font-weight: 700;
+}
+
+.personal-group span {
+  font-size: 13.3px;
+  font-weight: 400;
+}
+
+.interests {
+  display: flex;
+  flex-direction: column;
+  gap: 10.68px;
+  margin-top: 20px;
+}
+
+.interest {
+  font-size: 13.3px;
+  font-weight: 700;
+  line-height: 16.32px;
+}
+
+.languages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.language {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.language h3 {
+  font-size: 13.3px;
+  font-weight: 700;
+  line-height: 16.32px;
+}
+
+.language span {
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 15.84px;
+}
+
+.right {
+  background-color: #F8F8F8;
+  padding: 0 16px 0px 16px;
+  color: #000000;
+  width: 644px;
+}
+
+.title {
+  font-size: 27.9px;
+  font-weight: 700;
+  line-height: 35.6px;
+  padding-bottom: 27.3px;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.about {
+  margin-top: 14.19px;
+  font-size: 13.1px;
+  font-weight: 400;
+  line-height: 15.84px;
+}
+
+
+.right__section--experience {
+  margin-top: 1px;
+  padding-top: 15px;
+  padding-bottom: 26px;
+}
+
+.right__section--education {
+  margin-top: 0px;
+  padding-top: 15px;
+  padding-bottom: 26px;
+}
+
+.right__section--courses {
+  margin-top: 1px;
+  padding-top: 15px;
+  padding-bottom: 11px;
+}
+
+.right__section__title {
+  font-size: 15.9px;
+  font-weight: 700;
+  line-height: 19.2px;
+  padding-bottom: 15.1px;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.right__group-big, .right__group-small {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.right__group-big {
+  gap: 23.95px;
+}
+
+.right__group-small {
+  gap: 12px;
+}
+
+.right__group__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right__group__title__text {
+  font-size: 13.7px;
+  font-weight: 700;
+  line-height: 16.32px;
+}
+
+.right__group__title__date {
+  font-size: 13.2px;
+  font-weight: 400;
+  line-height: 15.84px;
+}
+
+.right__group__subtitle {
+  font-size: 13.5px;
+  margin-top: 2px;
+  font-weight: 400;
+  line-height: 16.32px;
+  display: block;
+  font-style: italic;
+}
+
+.right__group-big__about {
+  margin-top: 12.43px;
+  font-size: 13.2px;
+  font-weight: 400;
+  line-height: 15.84px;
 }

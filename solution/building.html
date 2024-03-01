@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="build" id="build">
-  <h1 test-id="resume-form-title">Конструктор резюме</h1>
+  <h1>Конструктор резюме</h1>
   <div test-id="resume-builder">
     <form id="resume-form">
       <div>
@@ -18,53 +18,51 @@
       <div>
         <label for="birth">
           Дата рождения:
-          <input type="date" id="birth" name="birth" placeholder="Дата рождения">
+          <input type="date" id="birth" test-id="personal-info" name="birth" placeholder="Дата рождения">
         </label>
       </div>
       <div>
         <label for="town">
           Родной город:
-          <input type="text" id="town" name="town" placeholder="Родной город">
+          <input type="text" id="town" test-id="personal-info" name="town" placeholder="Родной город">
         </label>
       </div>
-
+      <div>
+        <label for="telephone">Телефон:</label>
+        <input type="number" id="telephone" test-id="personal-info" name="telephone"
+               placeholder="+7(977)777-77-77"
+               minlength=10 maxlength=10 />
+      </div>
       <div>
         <label for="email">Email:</label>
         <input type="email" id="email" test-id="personal-info" placeholder="example@gmail.com" name="email">
-      </div>
-
-      <div>
-        <label for="telephone">Телефон:</label>
-        <input type="tel" id="telephone" test-id="personal-info" name="telephone"
-               data-mask="phone"
-               placeholder="+7(977)777-77-77"
-               minlength=16 maxlength=16/>
       </div>
 
       <div class="br"></div>
 
       <div class="inputs" id="summary_div">
         <label for="summary">Интересы:</label>
-        <input type='text' id="summary" name="summary" placeholder="Ваше хобби">
-        <button class="create">+</button>
-        <button class="delete">-</button>
+        <input type='text' id="summary" test-id="interest" name="summary" placeholder="Ваше хобби">
+        <button class="create" test-id="add-interest">+</button>
+        <button class="delete" test-id="remove-interest">-</button>
       </div>
 
       <div class="br"></div>
-      <div>
-        <textarea id="about" placeholder="Расскажите о себе"></textarea>
-      </div>
 
       <div class="multiply_form" id="skills_div">
         <h3> Владение языками</h3>
-<!--        <div class="flex">-->
-          <div class="set_divs">
-            <input type="text" id="language" name="skills" placeholder="Язык" required>
-            <input type="text" id="level" name="level" placeholder=B2 >
-          </div>
-<!--        </div>-->
-        <button id="create_language">+</button>
-        <button class="delete_set_divs">-</button>
+        <div class="set_divs">
+          <input type="text" id="language" name="skills" test-id="language-name" placeholder="Язык">
+          <input type="text" id="level" name="level" test-id="language-level" placeholder=B2>
+        </div>
+        <button id="create_language" test-id="add-language">+</button>
+        <button class="delete_set_divs" test-id="remove-language">-</button>
+      </div>
+
+      <div class="br"></div>
+
+      <div>
+        <textarea id="about" test-id="personal-description" placeholder="Расскажите о себе"></textarea>
       </div>
 
       <div class="br"></div>
@@ -72,39 +70,40 @@
       <div class="multiply_form" id="experience_div">
         <h3> Опыт работы</h3>
         <div class="set_divs">
-          <input type="text" id="experience" name="experience" placeholder="Имя компании">
-          <input type="text" id="post" name="post" placeholder="Должность">
+          <input type="text" id="experience" test-id="job-place" name="experience" placeholder="Место работы">
+          <input type="text" id="post" test-id="job-title" name="post" placeholder="Должность">
           <label for="start_work">
             Дата начала:
-            <input type="date" id="start_work" name="start_work" placeholder="Дата начала">
+            <input type="date" id="start_work" test-id="job-date-start" name="start_work" placeholder="Дата начала">
           </label>
 
           <label for="end_work">
             Дата окончания:
-            <input type="date" id="end_work" name="end_work" placeholder="Дата окончания">
+            <input type="date" id="end_work" test-id="job-date-end" name="end_work" placeholder="Дата окончания">
           </label>
-          <textarea id="about_work" placeholder="Расскажите о том, чем занимались на должности"></textarea>
+          <textarea id="about_work" test-id="job-description"
+                    placeholder="Расскажите о том, чем занимались на должности"></textarea>
         </div>
-        <button id="create_experience">+</button>
-        <button class="delete_set_divs">-</button>
+        <button id="create_experience" test-id="add-job">+</button>
+        <button class="delete_set_divs" test-id="remove-job">-</button>
       </div>
       <div class="br"></div>
 
       <div class="multiply_form" id="education_div">
         <h3> Обучение и квалификация</h3>
         <div class="set_divs">
-          <input type="text" id="education" name="education" placeholder="Образование">
-          <input type="text" id="place_education" name="place_education" placeholder="Организация">
+          <input type="text" id="education" test-id="education-title" name="education" placeholder="Высшее образование">
           <label for="start_work">
             Дата начала:
-            <input type="date" id="start_education" name="start_education" placeholder="Дата начала обучения">
+            <input type="date" id="start_education" test-id="education-date-start" name="start_education" placeholder="Дата начала обучения">
           </label>
 
           <label for="end_work">
             Дата окончания:
-            <input type="date" id="end_education" name="end_education" placeholder="Дата окончания обучения">
+            <input type="date" id="end_education" test-id="education-date-end" name="end_education" placeholder="Дата окончания обучения">
           </label>
-          <textarea id="about_education" placeholder="Расскажите о своем обучении"></textarea>
+          <input type="text" id="place_education" test-id="education-place"name="place_education" placeholder="Организация">
+          <textarea id="about_education" test-id="education-description" placeholder="Расскажите о своем обучении"></textarea>
         </div>
         <button id="create_education">+</button>
         <button class="delete_set_divs">-</button>
@@ -115,48 +114,90 @@
       <div class="multiply_form" id="course_div">
         <h3> Курсы </h3>
         <div class="set_divs">
-          <input type="text" id="name_course" name="name_course" placeholder="Название курса">
-          <input type="text" id="name_author" name="name_author" placeholder="Автор курса">
+          <input type="text" id="name_course" test-id="course-title" name="name_course" placeholder="Название курса">
           <label for="start_work">
             Дата начала:
-            <input type="date" id="start_course" name="start_course" placeholder="Дата начала обучения">
+            <input type="date" id="start_course" test-id="course-date-start" name="start_course" placeholder="Дата начала обучения">
           </label>
 
           <label for="end_work">
             Дата окончания:
-            <input type="date" id="end_course" name="end_course" placeholder="Дата окончания обучения">
+            <input type="date" id="end_course" test-id="course-date-end" name="end_course" placeholder="Дата окончания обучения">
           </label>
         </div>
-        <button id="create_course">+</button>
-        <button class="delete_set_divs">-</button>
+        <input type="text" id="name_author" test-id="course-place" name="name_author" placeholder="Автор курса">
+        <button id="create_course" test-id="add-course">+</button>
+        <button class="delete_set_divs" test-id="remove-course">-</button>
       </div>
 
       <div class="br"></div>
 
       <div>
-        <button type="submit" id="submit">Сохранить и просмотреть</button>
+        <button type="submit" id="submit" test-id="generate-resume">Сохранить и просмотреть</button>
       </div>
     </form>
   </div>
 </div>
-<div class="resume" id="resume">
+<main id="div_resume">
   <h1>Просмотрите свое резюме</h1>
-  <div>
-    <p id="name-display"></p>
-    <p id="email-display"></p>
-    <p id="telephone-display"></p>
-    <p id="summary-display"></p>
-    <p id="languages-display"></p>
-    <p id="levels-display"></p>
-    <p id="education-display"></p>
-    <p id="experience-display"></p>
+  <div class="container resume-page" id="resume" test-id="resume-main-content">
+    <aside class="left" test-id="resume-main-article">
+      <img alt="" class="avatar" src="/solution/images/photo.jpg"/>
+      <section class="left__section left__section--personal-data" test-id="resume-main-section">
+        <h2 class="left__section__title">Личные данные</h2>
+        <ul class="personal-groups">
+          <h2 class="left__section__fem">ФИО</h2>
+          <li class="personal-group" id="name-display"></li>
+          <h2 class="left__section__fem" id="date_birth">Дата рождения</h2>
+          <li class="personal-group" id="birth-display"></li>
+          <h2 class="left__section__fem" id="town_title">Город</h2>
+          <li class="personal-group" id="town-display"></li>
+          <h2 class="left__section__fem" id="telephone_title">Номер телефона</h2>
+          <li class="personal-group" id="telephone-display"></li>
+          <h2 class="left__section__fem" id="email_title">Email</h2>
+          <li class="personal-group" id="email-display"></li>
+
+        </ul>
+      </section>
+      <section class="left__section left__section--interests" test-id="resume-main-section" id="interests">
+        <h2 class="left__section__title" id="summary_title">Интересы</h2>
+        <ul class="interest" id="summary-display">
+        </ul>
+      </section>
+      <section class="left__section left__section--languages" test-id="resume-main-section" id="languages">
+        <h2 class="left__section__title" id="languages_title">Языки</h2>
+        <ul class="languages" id="languages-display"></ul>
+        <ul class='languages' id="levels-display"></ul>
+      </section>
+    </aside>
+    <aside class="right" id="right" test-id="resume-main-article">
+      <h1 class="title" id="title"></h1>
+      <p class='about' id="about-display"></p>
+      <section class="right__section right__section--experience" id="experience_section">
+        <h2 class="right__section__title" id="experience_title">Опыт работы</h2>
+        <ul class="right__group-big" id="experience-display">
+        </ul>
+      </section>
+      <section class="right__section right__section--education" test-id="resume-main-section" id="education_section">
+        <h2 class="right__section__title" id="education_title">
+          Образование и квалификация
+        </h2>
+        <ul class="right__group-big" id="education-display"></ul>
+      </section>
+      <section class="right__section right__section--courses" test-id="resume-main-section" id="course_section">
+        <h2 class="right__section__title" id="course_title">Курсы</h2>
+        <ul class="right__group-small" id="course-display"></ul>
+      </section>
+
+    </aside>
+  </div>
+  <div class="edit">
+    <button id="edit" test-id="back-button">Назад</button>
   </div>
   <div>
-    <button id="edit">Редактировать</button>
+    <button id="save" test-id="save-button">Сохранить</button>
   </div>
-</div>
+</main>
 </body>
 <script src="index.js"></script>
-<script src="./components/imask.js"></script>
-<script src="./components/main.js"></script>
 </html>
