@@ -311,3 +311,17 @@ li {
   padding-bottom: -1px;
   margin-bottom: -1px;
 }
+/*page list resumes*/
+#list_resumes{
+  padding: 10px;
+  border: 1px solid black;
+}
+.nav_list_resumes{
+  display: flex;
+  margin: 0 7% 0 7%;
+  justify-content: space-around;
+}
+.list_resumes_card{
+  display: flex;
+  justify-content: space-around;
+}

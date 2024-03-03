@@ -1,19 +1,23 @@
 // Функция для сохранения данных формы в local storage
+const formData = {}
 function saveFormData() {
-  // Получаем элементы формы по их id
-  let name = document.getElementById("name");
-  let birth = document.getElementById('birth')
-  let town = document.getElementById('town');
-  let email = document.getElementById("email");
-  let telephone = document.getElementById("telephone");
+  formData.name = document.getElementById("name").value;
+  formData.birth = document.getElementById('birth').value;
+  formData.town = document.getElementById('town').value;
+  formData.email = document.getElementById("email").value;
+  formData.telephone = document.getElementById("telephone").value;
+
   let summaryDiv = document.getElementById('summary_div');
   let inputs_summary = summaryDiv.querySelectorAll('input');
-  let summary = [];
+  let summaries = [];
   inputs_summary.forEach(function (input) {
     if (input.value) {
-      summary.push(input.value);
+      summaries.push(input.value);
     }
   });
+  formData.summary = summaries;
+
+  formData.about = document.getElementById('about').value;
 
   let language_div = document.getElementById("skills_div");
   let divs_language = language_div.querySelectorAll('.set_divs');
@@ -28,6 +32,7 @@ function saveFormData() {
       languages.push([language, level]);
     }
   });
+  formData.languages = languages
 
   let workExperience = [];
 
@@ -51,6 +56,7 @@ function saveFormData() {
       workExperience.push(experienceData);
     }
   });
+  formData.workExperience = workExperience;
 
   let education = [];
 
@@ -74,6 +80,7 @@ function saveFormData() {
       education.push(educationData);
     }
   });
+    formData.education = education
 
   let courses = [];
 
@@ -96,20 +103,20 @@ function saveFormData() {
     }
   });
 
-  let about = document.getElementById('about');
-
+  formData.courses =  courses;
   // Сохраняем значения элементов формы в local storage с ключами, соответствующими их id
-  localStorage.setItem("name", name.value);
-  localStorage.setItem("birth", birth.value);
-  localStorage.setItem("town", town.value);
-  localStorage.setItem("email", email.value);
-  localStorage.setItem("telephone", telephone.value);
-  localStorage.setItem("summary", JSON.stringify(summary));
-  localStorage.setItem("languages", JSON.stringify(languages));
-  localStorage.setItem('about', about.value);
-  localStorage.setItem("education", JSON.stringify(education));
-  localStorage.setItem('workExperience', JSON.stringify(workExperience));
-  localStorage.setItem('courses', JSON.stringify(courses));
+  localStorage.setItem("name", formData.name);
+  localStorage.setItem("birth", formData.birth);
+  localStorage.setItem("town", formData.town);
+  localStorage.setItem("email", formData.email);
+  localStorage.setItem("telephone", formData.telephone);
+  localStorage.setItem("summary", JSON.stringify(formData.summary));
+  console.log(formData.summary)
+  localStorage.setItem('about', formData.about);
+  localStorage.setItem("languages", JSON.stringify(formData.languages));
+  localStorage.setItem("education", JSON.stringify(formData.education));
+  localStorage.setItem('workExperience', JSON.stringify(formData.workExperience));
+  localStorage.setItem('courses', JSON.stringify(formData.courses));
 
 }
 
@@ -676,11 +683,50 @@ function getMonthYearRussian(dateString) {
   return `${month} ${year} г.`;
 }
 
-function formatPhoneNumber(phoneNumber) {
-  let cleaned = ('' + phoneNumber).replace(/\D/g, '');
-  let match = cleaned.match(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/);
-  if (match) {
-    return '+' + match[1] + ' (' + match[2] + ') ' + match[3] + ' ' + match[4] + '-' + match[5];
+function getAllFormValues() {
+  const allFormValues = {};
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('dict_')) {
+      const valueString = localStorage.getItem(key);
+      allFormValues[key] = JSON.parse(valueString);
+    }
   }
-  return phoneNumber;
+
+  return allFormValues;
 }
+
+function createFormId() {
+  const formKeys = Object.keys(getAllFormValues());
+  if (formKeys.length === 0) {
+    return 'dict_1';
+  }
+
+  const latestFormKey = formKeys[formKeys.length - 1];
+  const latestFormIndex = parseInt(latestFormKey.split('_')[1]);
+
+  return `dict_${latestFormIndex + 1}`;
+}
+
+function saveFormDataToLocalStorage(formData) {
+  const formId = createFormId();
+  const dataToSave = JSON.stringify(formData);
+  localStorage.setItem(formId, dataToSave);
+}
+
+function getFormValuesById(formId) {
+  const valueString = localStorage.getItem(formId);
+  if (!valueString) {
+    return null;
+  }
+
+  return JSON.parse(valueString);
+}
+
+const saveResume = document.getElementById('save');
+saveResume.addEventListener('click', function () {
+
+  saveFormDataToLocalStorage(formData);
+  // location.href='index.html';
+})
