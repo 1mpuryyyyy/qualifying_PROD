@@ -47,13 +47,56 @@ function saveFormData() {
       "endDate": endDate,
       "jobDescription": jobDescription
     };
-
-    workExperience.push(experienceData);
+    if (experienceData.jobPosition !== '') {
+      workExperience.push(experienceData);
+    }
   });
 
-  let education = document.getElementById("education");
+  let education = [];
+
+  let educationDivs = document.querySelectorAll('#education_div .set_divs');
+
+  Array.from(educationDivs).forEach(div => {
+    let educationName = div.querySelector('#education').value;
+    let startDate = div.querySelector('#start_education').value;
+    let endDate = div.querySelector('#end_education').value;
+    let placeEducation = div.querySelector('#place_education').value;
+    let educationDescription = div.querySelector('#about_education').value;
+
+    let educationData = {
+      "educationName": educationName,
+      "startDate": startDate,
+      "endDate": endDate,
+      "placeEducation": placeEducation,
+      "educationDescription": educationDescription
+    };
+    if (educationData.educationName !== '') {
+      education.push(educationData);
+    }
+  });
+
+  let courses = [];
+
+  let courseDivs = document.querySelectorAll('#course_div .set_divs');
+
+  Array.from(courseDivs).forEach(div => {
+    let courseName = div.querySelector('#name_course').value;
+    let startDate = div.querySelector('#start_course').value;
+    let endDate = div.querySelector('#end_course').value;
+    let authorCourse = div.querySelector('#name_author').value;
+
+    let courseData = {
+      "courseName": courseName,
+      "startDate": startDate,
+      "endDate": endDate,
+      "authorCourse": authorCourse
+    };
+    if (courseData.courseName !== '') {
+      courses.push(courseData);
+    }
+  });
+
   let about = document.getElementById('about');
-  // let course = document.getElementById('name_course')
 
   // Сохраняем значения элементов формы в local storage с ключами, соответствующими их id
   localStorage.setItem("name", name.value);
@@ -64,8 +107,9 @@ function saveFormData() {
   localStorage.setItem("summary", JSON.stringify(summary));
   localStorage.setItem("languages", JSON.stringify(languages));
   localStorage.setItem('about', about.value);
-  localStorage.setItem("education", education.value);
+  localStorage.setItem("education", JSON.stringify(education));
   localStorage.setItem('workExperience', JSON.stringify(workExperience));
+  localStorage.setItem('courses', JSON.stringify(courses));
 
 }
 
@@ -79,7 +123,7 @@ let email = document.getElementById("email");
 let telephone = document.getElementById("telephone");
 let about = document.getElementById('about');
 
-//   // Загружаем значения элементов формы из local storage с ключами, соответствующими их id
+// Загружаем значения элементов формы из local storage с ключами, соответствующими их id
 name.value = localStorage.getItem("name");
 if (!name || name.value !== '') {
   document.getElementById('submit').removeAttribute('disabled');
@@ -94,78 +138,12 @@ about.value = localStorage.getItem('about')
 
 // }
 
-// Функция для отображения данных резюме на странице просмотра
+// Функция для отображения данных резюме
 function displayResumeData() {
   let leftAside = document.getElementById('left-aside');
   let rightAside = document.getElementById('right');
 
-
-// Creating languages section
-
-
-  //
-  // const sectionExperience = document.createElement("section");
-  // sectionExperience.classList.add("right__section");
-  // sectionExperience.classList.add("right__section--experience");
-  // sectionExperience.id = "experience_section";
-  //
-  // const experienceTitle = document.createElement("h2");
-  // experienceTitle.classList.add("right__section__title");
-  // experienceTitle.id = "experience_title";
-  // experienceTitle.innerText = "Опыт работы";
-  //
-  // const ulExperience = document.createElement("ul");
-  // ulExperience.classList.add("right__group-big");
-  // ulExperience.id = "experience-display";
-  //
-  // sectionExperience.appendChild(experienceTitle);
-  // sectionExperience.appendChild(ulExperience);
-  //
-  // const sectionEducation = document.createElement("section");
-  // sectionEducation.classList.add("right__section");
-  // sectionEducation.classList.add("right__section--education");
-  // sectionEducation.setAttribute("test-id", "resume-main-section");
-  // sectionEducation.id = "education_section";
-  //
-  // const educationTitle = document.createElement("h2");
-  // educationTitle.classList.add("right__section__title");
-  // educationTitle.id = "education_title";
-  // educationTitle.innerText = "Образование и квалификация";
-  //
-  // const ulEducation = document.createElement("ul");
-  // ulEducation.classList.add("right__group-big");
-  // ulEducation.id = "education-display";
-  //
-  // sectionEducation.appendChild(educationTitle);
-  // sectionEducation.appendChild(ulEducation);
-  //
-  // const sectionCourses = document.createElement("section");
-  // sectionCourses.classList.add("right__section");
-  // sectionCourses.classList.add("right__section--courses");
-  // sectionCourses.setAttribute("test-id", "resume-main-section");
-  // sectionCourses.id = "course_section";
-  //
-  // const courseTitle = document.createElement("h2");
-  // courseTitle.classList.add("right__section__title");
-  // courseTitle.id = "course_title";
-  // courseTitle.innerText = "Курсы";
-  //
-  // const ulCourses = document.createElement("ul");
-  // ulCourses.classList.add("right__group-small");
-  // ulCourses.id = "course-display";
-  //
-  // sectionCourses.appendChild(courseTitle);
-  // sectionCourses.appendChild(ulCourses);
-  //
-  // asideRight.appendChild(about);
-  // asideRight.appendChild(sectionExperience);
-  // asideRight.appendChild(sectionEducation);
-  // asideRight.appendChild(sectionCourses);
-
-  // mainContent.appendChild(asideRight);
-
-
-  // Отображаем значения элементов резюме из local storage с ключами, соответствующими их id
+  // создаем элементы резюме из local storage
   let img = document.createElement('img');
   img.classList.add('avatar');
   img.id = 'avatar';
@@ -174,9 +152,9 @@ function displayResumeData() {
   let sectionPersonalData = document.createElement('section');
   sectionPersonalData.class = 'left__section left__section--personal-data';
   sectionPersonalData.id = 'section-personal-data';
-  sectionPersonalData.setAttribute('test-id',"resume-main-section");
+  sectionPersonalData.setAttribute('test-id', "resume-main-section");
 
-  let personalGroups =  document.createElement('ul');
+  let personalGroups = document.createElement('ul');
   personalGroups.id = 'personal_groups';
   personalGroups.classList.add('personal-groups');
 
@@ -188,44 +166,33 @@ function displayResumeData() {
   sectionPersonalData.appendChild(personalGroups);
 
   let nameDisplay = localStorage.getItem("name");
-  if (nameDisplay) {
-    console.log(nameDisplay)
-    let personalGroup = document.createElement('li');
-    personalGroup.classList.add('personal-group');
-    personalGroup.id = 'name-display';
-    let h2 = document.createElement('h2');
-    h2.classList.add('left__section__fem');
-    h2.innerText = 'ФИО'
-    let span = document.createElement('span');
-    span.id = 'name_display';
-    span.innerText = nameDisplay
-    personalGroup.appendChild(h2)
-    personalGroup.appendChild(span);
-    personalGroups.appendChild((personalGroup));
-  }
+  let personalGroup = document.createElement('li');
+  personalGroup.classList.add('personal-group');
+  personalGroup.id = 'name-display';
+  let h3 = document.createElement('h3');
+  h3.classList.add('left__section__fem');
+  h3.innerText = 'ФИО'
+  let span = document.createElement('span');
+  span.id = 'name_display';
+  span.innerText = nameDisplay
+  personalGroup.appendChild(h3)
+  personalGroup.appendChild(span);
+  personalGroups.appendChild((personalGroup));
 
-  let titleDisplay = localStorage.getItem('name')
-  if (titleDisplay) {
-    let title = document.createElement('h1');
-    title.classList.add('title');
-    title.id = 'title';
-    title.innerText = titleDisplay;
-    rightAside.appendChild(title);
-  }
 
   let birthDate = localStorage.getItem('birth').split('-').reverse().join('.');
   if (birthDate) {
     let personalGroup = document.createElement('li');
     personalGroup.classList.add('personal-group');
     personalGroup.id = 'birth-display';
-    let h2 = document.createElement('h2');
-    h2.classList.add('left__section__fem');
-    h2.id = 'date_birth';
-    h2.innerText = 'Дата рождения'
+    let h3 = document.createElement('h3');
+    h3.classList.add('left__section__fem');
+    h3.id = 'date_birth';
+    h3.innerText = 'Дата рождения'
     let span = document.createElement('span');
     span.id = 'birth_display';
     span.innerText = birthDate;
-    personalGroup.appendChild(h2)
+    personalGroup.appendChild(h3)
     personalGroup.appendChild(span);
     personalGroups.appendChild((personalGroup));
   }
@@ -236,15 +203,15 @@ function displayResumeData() {
     townGroup.classList.add('personal-group');
     townGroup.id = 'town-display';
 
-    let h2 = document.createElement('h2');
-    h2.classList.add('left__section__fem');
-    h2.id = 'town_title';
-    h2.innerText = 'Город'
+    let h3 = document.createElement('h3');
+    h3.classList.add('left__section__fem');
+    h3.id = 'town_title';
+    h3.innerText = 'Город'
 
     let span = document.createElement('span');
     span.id = 'town_display';
     span.innerText = townDisplay;
-    townGroup.appendChild(h2)
+    townGroup.appendChild(h3)
     townGroup.appendChild(span);
     personalGroups.appendChild((townGroup));
   }
@@ -255,15 +222,15 @@ function displayResumeData() {
     phoneGroup.classList.add('personal-group');
     phoneGroup.id = 'telephone-display';
 
-    let h2 = document.createElement('h2');
-    h2.classList.add('left__section__fem');
-    h2.id = 'telephone_title';
-    h2.innerText = 'Номер телефона'
+    let h3 = document.createElement('h3');
+    h3.classList.add('left__section__fem');
+    h3.id = 'telephone_title';
+    h3.innerText = 'Номер телефона'
 
     let span = document.createElement('span');
     span.id = 'telephone_display';
     span.innerText = telephoneDisplay;
-    phoneGroup.appendChild(h2)
+    phoneGroup.appendChild(h3)
     phoneGroup.appendChild(span);
     personalGroups.appendChild((phoneGroup));
   }
@@ -274,25 +241,23 @@ function displayResumeData() {
     emailGroup.classList.add('personal-group');
     emailGroup.id = 'email-display';
 
-    let h2 = document.createElement('h2');
-    h2.classList.add('left__section__fem');
-    h2.id = 'email_title';
-    h2.innerText = 'Email'
+    let h3 = document.createElement('h3');
+    h3.classList.add('left__section__fem');
+    h3.id = 'email_title';
+    h3.innerText = 'Email'
 
     let span = document.createElement('span');
     span.id = 'email_display';
     span.innerText = emailDisplay;
-    emailGroup.appendChild(h2)
+    emailGroup.appendChild(h3)
     emailGroup.appendChild(span);
     personalGroups.appendChild((emailGroup));
   }
   leftAside.appendChild(img);
   leftAside.appendChild(sectionPersonalData);
-  console.log(sectionPersonalData);
 
 
   if (JSON.parse(localStorage.getItem("summary"))[0]) {
-    console.log(JSON.parse(localStorage.getItem("summary")))
     let interestsSection = document.createElement('section');
     interestsSection.className = 'left__section left__section--interests';
     interestsSection.setAttribute('test-id', 'resume-main-section');
@@ -351,60 +316,183 @@ function displayResumeData() {
     leftAside.appendChild(languagesSection);
   }
 
+  let sectionAbout = document.createElement('section');
+  sectionAbout.setAttribute('test-id', "resume-main-section");
+  sectionAbout.class = 'right__section__title';
+
+  let titleDisplay = localStorage.getItem('name')
+  if (titleDisplay) {
+    let title = document.createElement('h1');
+    title.classList.add('title');
+    title.id = 'title';
+    title.innerText = titleDisplay;
+    sectionAbout.appendChild(title);
+  }
+
+
   if (localStorage.getItem('about')) {
-    console.log(localStorage.getItem('about'))
     let about = document.createElement("p");
     about.classList.add("about");
     about.id = "about-display";
-    about.setAttribute('test-id', "personal-description");
     about.innerText = localStorage.getItem('about');
-    rightAside.appendChild(about)
+    sectionAbout.appendChild(about)
   }
+
+  rightAside.appendChild(sectionAbout);
 
 
   let workExperienceData = JSON.parse(localStorage.getItem("workExperience")) || [];
+  if (workExperienceData[0]) {
+    let sectionExperience = document.createElement('section');
+    sectionExperience.class = 'right__section right__section--experience';
+    sectionExperience.id = 'experience_section';
+    sectionExperience.setAttribute('test-id', "resume-main-section");
 
-  // ulDisplay.innerHTML = "";
-  workExperienceData.forEach(experience => {
-    let li = document.createElement('li');
-    li.classList.add('right__group-big__item');
-    let div = document.createElement('div');
-    div.classList.add('right__group__title');
-    let positionItem = document.createElement("h3");
-    positionItem.classList.add('right__group__title');
-    let dateItem = document.createElement("span");
-    dateItem.classList.add('right__group__title__date');
-    let experienceItem = document.createElement("span");
-    experienceItem.classList.add('right__group__subtitle');
-    let aboutItem = document.createElement("p");
-    aboutItem.classList.add('right__group-big__about');
+    let h2 = document.createElement('h2');
+    h2.classList.add('right__section__title');
+    h2.id = 'experience_title';
+    h2.innerText = 'Опыт работы';
 
-    positionItem.textContent = `${experience.jobPosition}`;
-    if (experience.startDate !== '') {
-      if (experience.endDate !== '') {
-        dateItem.textContent = `${getMonthYearRussian(experience.startDate)} - ${getMonthYearRussian(experience.endDate)}`;
-      } else {
-        dateItem.textContent = `${getMonthYearRussian(experience.startDate)} - наст. время`;
+    let ulExperience = document.createElement('ul');
+    ulExperience.classList.add('right__group-big');
+    ulExperience.id = 'experience-display';
+
+    workExperienceData.forEach(experience => {
+      console.log(experience);
+      if (experience.jobPosition !== '') {
+        let div = document.createElement('div');
+        div.classList.add('right__group__title');
+        let positionItem = document.createElement("h3");
+        positionItem.classList.add('right__group__title__text');
+        let dateItem = document.createElement("span");
+        dateItem.classList.add('right__group__title__date');
+        let experienceItem = document.createElement("span");
+        experienceItem.classList.add('right__group__subtitle');
+        let aboutItem = document.createElement("p");
+        aboutItem.classList.add('right__group-big__about');
+
+        positionItem.textContent = `${experience.jobPosition}`;
+        if (experience.startDate !== '') {
+          if (experience.endDate !== '') {
+            dateItem.textContent = `${getMonthYearRussian(experience.startDate)} — ${getMonthYearRussian(experience.endDate)}`;
+          } else {
+            dateItem.textContent = `${getMonthYearRussian(experience.startDate)} — наст. время`;
+          }
+        }
+        experienceItem.textContent = `${experience.companyName}`;
+        aboutItem.textContent = `${experience.jobDescription}`;
+        div.appendChild(positionItem);
+        div.appendChild(dateItem);
+        ulExperience.appendChild(div);
+        ulExperience.appendChild(experienceItem);
+        ulExperience.appendChild(aboutItem);
       }
-    }
-    experienceItem.textContent = `${experience.companyName}`;
-    aboutItem.textContent = `${experience.jobDescription}`;
-    div.appendChild(positionItem);
-    div.appendChild(dateItem);
-    ulDisplay.appendChild(div);
-    ulDisplay.appendChild(experienceItem);
-    ulDisplay.appendChild(aboutItem);
-  });
-  if (workExperienceData.length === 1) {
-    document.getElementById('experience_section').style.display = 'None';
+    });
+    sectionExperience.appendChild(h2);
+    sectionExperience.appendChild(ulExperience);
+    rightAside.appendChild(sectionExperience);
   }
-  educationDisplay.textContent = localStorage.getItem("education") || "";
-  if (educationDisplay.textContent === '') {
-    document.getElementById('education_section').style.display = 'None';
+
+  let educationData = JSON.parse(localStorage.getItem("education")) || [];
+  if (educationData[0]) {
+    let sectionEducation = document.createElement('section');
+    sectionEducation.class = 'right__section right__section--education';
+    sectionEducation.id = 'education_section';
+    sectionEducation.setAttribute('test-id', "resume-main-section");
+
+    let h2 = document.createElement('h2');
+    h2.classList.add('right__section__title');
+    h2.id = 'education_title';
+    h2.innerText = 'Образование и квалификация';
+
+    let ulEducation = document.createElement('ul');
+    ulEducation.classList.add('right__group-big');
+    ulEducation.id = 'education-display';
+
+    educationData.forEach(education => {
+      console.log(education);
+      if (education.jobPosition !== '') {
+        let div = document.createElement('div');
+        div.classList.add('right__group__title');
+        let educationTitle = document.createElement("h3");
+        educationTitle.classList.add('right__group__title__text');
+        educationTitle.id = 'right__group__title__text';
+        let dateItem = document.createElement("span");
+        dateItem.classList.add('right__group__title__date');
+        let educationPlace = document.createElement("span");
+        educationPlace.classList.add('right__group__subtitle');
+        let aboutItem = document.createElement("p");
+        aboutItem.classList.add('right__group-big__about');
+
+        educationTitle.textContent = `${education.educationName}`;
+        if (education.startDate !== '') {
+          if (education.endDate !== '') {
+            dateItem.textContent = `${getMonthYearRussian(education.startDate)} — ${getMonthYearRussian(education.endDate)}`;
+          } else {
+            dateItem.textContent = `${getMonthYearRussian(education.startDate)} — наст. время`;
+          }
+        }
+        educationPlace.textContent = `${education.placeEducation}`;
+        aboutItem.textContent = `${education.educationDescription}`;
+        div.appendChild(educationTitle);
+        div.appendChild(dateItem);
+        ulEducation.appendChild(div);
+        ulEducation.appendChild(educationPlace);
+        ulEducation.appendChild(aboutItem);
+      }
+    });
+    sectionEducation.appendChild(h2);
+    sectionEducation.appendChild(ulEducation);
+    rightAside.appendChild(sectionEducation);
   }
-  courseDisplay.textContent = localStorage.getItem("course") || "";
-  if (courseDisplay.textContent === '') {
-    document.getElementById('course_section').style.display = 'None';
+
+  let coursesData = JSON.parse(localStorage.getItem("courses")) || [];
+  if (coursesData[0]) {
+    let sectionCourses = document.createElement('section');
+    sectionCourses.class = 'right__section right__section--education';
+    sectionCourses.id = 'courses_section';
+    sectionCourses.setAttribute('test-id', "resume-main-section");
+
+    let h2 = document.createElement('h2');
+    h2.classList.add('right__section__title');
+    h2.id = 'courses_title';
+    h2.innerText = 'Курсы';
+
+    let ulCourses = document.createElement('ul');
+    ulCourses.classList.add('right__group-big');
+    ulCourses.id = 'course-display';
+
+    coursesData.forEach(course => {
+      console.log(course);
+      if (course.courseName !== '') {
+        let div = document.createElement('div');
+        div.classList.add('right__group__title');
+        let courseTitle = document.createElement("h3");
+        courseTitle.classList.add('right__group__title__text');
+        courseTitle.id = 'right__group__title__text';
+        let dateItem = document.createElement("span");
+        dateItem.classList.add('right__group__title__date');
+        let courseAuthor = document.createElement("span");
+        courseAuthor.classList.add('right__group__subtitle');
+
+        courseTitle.textContent = `${course.courseName}`;
+        if (course.startDate !== '') {
+          if (course.endDate !== '') {
+            dateItem.textContent = `${getMonthYearRussian(course.startDate)} — ${getMonthYearRussian(course.endDate)}`;
+          } else {
+            dateItem.textContent = `${getMonthYearRussian(course.startDate)} — наст. время`;
+          }
+        }
+        courseAuthor.textContent = `${course.authorCourse}`;
+        div.appendChild(courseTitle);
+        div.appendChild(dateItem);
+        ulCourses.appendChild(div);
+        ulCourses.appendChild(courseAuthor);
+      }
+    });
+    sectionCourses.appendChild(h2);
+    sectionCourses.appendChild(ulCourses);
+    rightAside.appendChild(sectionCourses);
   }
 }
 
@@ -448,26 +536,9 @@ editButton.addEventListener("click", function (event) {
   del_div.style.visibility = 'hidden';
   add_div.style.display = 'flex';
   add_div.style.visibility = 'visible';
-  if (document.getElementById('interests')) {
-    let interestSection = document.getElementById('interests') || '';
-    interestSection.parentNode.removeChild(interestSection);
-  }
-  if (document.getElementById('languages')) {
-    let languagesSection = document.getElementById('languages') || '';
-    languagesSection.parentNode.removeChild(languagesSection);
-  }
-  if (document.getElementById('about')) {
-    let about = document.getElementById('about-display') || '';
-    about.parentNode.removeChild(about);
-  }
-  let img = document.getElementById('avatar');
-  img.parentNode.removeChild(img);
+  document.querySelector("#left-aside").innerHTML = "";
+  document.querySelector("#right").innerHTML = "";
 
-  let sectionPersonalData = document.getElementById('section-personal-data');
-  sectionPersonalData.parentNode.removeChild(sectionPersonalData);
-
-  let title = document.getElementById('title');
-  title.parentNode.removeChild(title);
   // loadFormData();
 });
 
@@ -518,7 +589,6 @@ create_experience.addEventListener('click', function (e) {
   let Div = document.createElement('div');
   Div.classList.add('set_divs');
   Div.innerHTML = `
-      <input type="text" id="experience" test-id="job-place" name="experience" placeholder="Место Работы">
           <input type="text" id="post" test-id="job-title" name="post" placeholder="Должность">
           <label for="start_work">
             Дата начала:
@@ -529,6 +599,7 @@ create_experience.addEventListener('click', function (e) {
             Дата окончания:
             <input type="date" id="end_work" test-id="job-date-end" name="end_work" placeholder="Дата окончания">
           </label>
+          <input type="text" id="experience" test-id="job-place" name="experience" placeholder="Место Работы">
           <textarea id="about_work" test-id="job-description" placeholder="Расскажите о том, чем занимались на должности"></textarea>
     `;
   document.getElementById('experience_div').insertBefore(Div, this);
@@ -540,18 +611,18 @@ create_education.addEventListener('click', function (e) {
   let Div = document.createElement('div');
   Div.classList.add('set_divs');
   Div.innerHTML = `
-      <input type="text" id="education" name="education" placeholder="Образование">
-          <input type="text" id="place_education" name="place_education" placeholder="Организация">
-          <label for="start_work">
+      <input type="text" id="education" test-id="education-title" name="education" placeholder="Высшее образование">
+          <label for="start_education">
             Дата начала:
-            <input type="date" id="start_education" name="start_education" placeholder="Дата начала обучения">
+            <input type="date" id="start_education" test-id="education-date-start" name="start_education" placeholder="Дата начала обучения">
           </label>
 
-          <label for="end_work">
+          <label for="end_education">
             Дата окончания:
-            <input type="date" id="end_education" name="end_education" placeholder="Дата окончания обучения">
+            <input type="date" id="end_education" test-id="education-date-end" name="end_education" placeholder="Дата окончания обучения">
           </label>
-          <textarea id="about_education" placeholder="Расскажите о своем обучении"></textarea>
+          <input type="text" id="place_education" test-id="education-place"name="place_education" placeholder="Организация">
+          <textarea id="about_education" test-id="education-description" placeholder="Расскажите о своем обучении"></textarea>
     `;
   document.getElementById('education_div').insertBefore(Div, this);
 });
@@ -562,17 +633,17 @@ create_course.addEventListener('click', function (e) {
   let Div = document.createElement('div');
   Div.classList.add('set_divs');
   Div.innerHTML = `
-      <input type="text" id="name_course" name="name_course" placeholder="Название курса">
-          <input type="text" id="name_author" name="name_author" placeholder="Автор курса">
-          <label for="start_work">
-            Дата начала:
-            <input type="date" id="start_course" name="start_course" placeholder="Дата начала обучения">
-          </label>
+      <input type="text" id="name_course" test-id="course-title" name="name_course" placeholder="Название курса">
+      <label for="start_course">
+        Дата начала:
+        <input type="date" id="start_course" test-id="course-date-start" name="start_course" placeholder="Дата начала обучения">
+      </label>
 
-          <label for="end_work">
-            Дата окончания:
-            <input type="date" id="end_course" name="end_course" placeholder="Дата окончания обучения">
-          </label>
+      <label for="end_course">
+        Дата окончания:
+        <input type="date" id="end_course" test-id="course-date-end" name="end_course" placeholder="Дата окончания обучения">
+      </label>
+      <input type="text" id="name_author" test-id="course-place" name="name_author" placeholder="Автор курса">
     `;
   document.getElementById('course_div').insertBefore(Div, this);
 });
@@ -602,7 +673,7 @@ function getMonthYearRussian(dateString) {
   const month = months[date.getMonth()];
   const year = date.getFullYear();
 
-  return `${month} ${year}`;
+  return `${month} ${year} г.`;
 }
 
 function formatPhoneNumber(phoneNumber) {

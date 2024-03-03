@@ -26,6 +26,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 h1 {
@@ -63,16 +64,21 @@ li {
   margin: 0 auto;
   max-width: 900px;
   width: 100%;
+  max-height: 854px;
 }
 
 /* Страница резюме */
 
 .resume-page {
   display: none;
+  max-width: 900px;
+  max-height: 854px;
 }
 
 #div_resume {
   display: none;
+  max-width: 900px;
+  max-height: 854px;
 }
 
 .left {
@@ -90,6 +96,7 @@ li {
   height: 200px;
   display: block;
   margin: 0 auto;
+  margin-bottom: 30px;
   border-radius: 50%;
 }
 
@@ -133,12 +140,14 @@ li {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .personal-group {
   display: flex;
   flex-direction: column;
+  gap: 3px;
+  margin-top: 5.6px;
 }
 
 .personal-group h3 {
@@ -206,7 +215,8 @@ li {
 }
 
 .about {
-  margin-top: 14.19px;
+  margin-top: 23px;
+  margin-bottom: 32px;
   font-size: 13.1px;
   font-weight: 400;
   line-height: 15.84px;
@@ -232,6 +242,7 @@ li {
 }
 
 .right__section__title {
+  margin-top: 20px;
   font-size: 15.9px;
   font-weight: 700;
   line-height: 19.2px;
@@ -246,8 +257,13 @@ li {
 }
 
 .right__group-big {
-  gap: 23.95px;
+  gap: 14.15px;
 }
+
+.right__group-big__about{
+  margin-bottom: 11.5px;
+}
+
 
 .right__group-small {
   gap: 12px;
@@ -264,7 +280,9 @@ li {
   font-weight: 700;
   line-height: 16.32px;
 }
-
+#right__group__title__text{
+  margin-top: 0.5px;
+}
 .right__group__title__date {
   font-size: 13.2px;
   font-weight: 400;
@@ -273,7 +291,7 @@ li {
 
 .right__group__subtitle {
   font-size: 13.5px;
-  margin-top: 2px;
+  margin-top: -15px;
   font-weight: 400;
   line-height: 16.32px;
   display: block;
@@ -285,4 +303,11 @@ li {
   font-size: 13.2px;
   font-weight: 400;
   line-height: 15.84px;
+}
+#course-display{
+  padding-bottom: 23px;
+}
+#languages-display{
+  padding-bottom: -1px;
+  margin-bottom: -1px;
 }

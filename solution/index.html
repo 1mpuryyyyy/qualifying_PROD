@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="build" id="build">
-  <h1>Конструктор резюме</h1>
+  <h1 test-id="resume-form-title">Конструктор резюме</h1>
   <div test-id="resume-builder">
     <form id="resume-form">
       <div>
@@ -70,7 +70,6 @@
       <div class="multiply_form" id="experience_div">
         <h3> Опыт работы</h3>
         <div class="set_divs">
-          <input type="text" id="experience" test-id="job-place" name="experience" placeholder="Место работы">
           <input type="text" id="post" test-id="job-title" name="post" placeholder="Должность">
           <label for="start_work">
             Дата начала:
@@ -81,6 +80,7 @@
             Дата окончания:
             <input type="date" id="end_work" test-id="job-date-end" name="end_work" placeholder="Дата окончания">
           </label>
+          <input type="text" id="experience" test-id="job-place" name="experience" placeholder="Место работы">
           <textarea id="about_work" test-id="job-description"
                     placeholder="Расскажите о том, чем занимались на должности"></textarea>
         </div>
@@ -93,20 +93,20 @@
         <h3> Обучение и квалификация</h3>
         <div class="set_divs">
           <input type="text" id="education" test-id="education-title" name="education" placeholder="Высшее образование">
-          <label for="start_work">
+          <label for="start_education">
             Дата начала:
             <input type="date" id="start_education" test-id="education-date-start" name="start_education" placeholder="Дата начала обучения">
           </label>
 
-          <label for="end_work">
+          <label for="end_education">
             Дата окончания:
             <input type="date" id="end_education" test-id="education-date-end" name="end_education" placeholder="Дата окончания обучения">
           </label>
           <input type="text" id="place_education" test-id="education-place"name="place_education" placeholder="Организация">
           <textarea id="about_education" test-id="education-description" placeholder="Расскажите о своем обучении"></textarea>
         </div>
-        <button id="create_education">+</button>
-        <button class="delete_set_divs">-</button>
+        <button id="create_education" test-id="add-education">+</button>
+        <button class="delete_set_divs" test-id="remove-education">-</button>
       </div>
 
       <div class="br"></div>
@@ -115,17 +115,17 @@
         <h3> Курсы </h3>
         <div class="set_divs">
           <input type="text" id="name_course" test-id="course-title" name="name_course" placeholder="Название курса">
-          <label for="start_work">
+          <label for="start_course">
             Дата начала:
             <input type="date" id="start_course" test-id="course-date-start" name="start_course" placeholder="Дата начала обучения">
           </label>
 
-          <label for="end_work">
+          <label for="end_course">
             Дата окончания:
             <input type="date" id="end_course" test-id="course-date-end" name="end_course" placeholder="Дата окончания обучения">
           </label>
+          <input type="text" id="name_author" test-id="course-place" name="name_author" placeholder="Автор курса">
         </div>
-        <input type="text" id="name_author" test-id="course-place" name="name_author" placeholder="Автор курса">
         <button id="create_course" test-id="add-course">+</button>
         <button class="delete_set_divs" test-id="remove-course">-</button>
       </div>
@@ -142,32 +142,6 @@
   <h1>Просмотрите свое резюме</h1>
   <div class="container resume-page" id="resume" test-id="resume-main-content">
     <aside class="left" test-id="resume-main-article" id="left-aside">
-<!--      <img class="avatar" src="/solution/images/photo.jpg"/>-->
-<!--      <section class="left__section left__section&#45;&#45;personal-data" id="section-personal-data" test-id="resume-main-section">-->
-<!--        <h2 class="left__section__title">Личные данные</h2>-->
-<!--        <ul class="personal-groups" id="personal_groups">-->
-<!--          <li class="personal-group" id="name-display">-->
-<!--            <h2 class="left__section__fem">ФИО</h2>-->
-<!--            <span id="name_display"></span>-->
-<!--          </li>-->
-<!--          <li class="personal-group" id="birth-display">-->
-<!--            <h2 class="left__section__fem" id="date_birth">Дата рождения</h2>-->
-<!--            <span id="birth_display"></span>-->
-<!--          </li>-->
-<!--          <li class="personal-group" id="town-display">-->
-<!--            <h2 class="left__section__fem" id="town_title">Город</h2>-->
-<!--            <span id="town_display"></span>-->
-<!--          </li>-->
-<!--          <li class="personal-group" id="telephone-display">-->
-<!--            <h2 class="left__section__fem" id="telephone_title">Номер телефона</h2>-->
-<!--            <span id="telephone_display"></span>-->
-<!--          </li>-->
-<!--          <li class="personal-group" id="email-display">-->
-<!--            <h2 class="left__section__fem" id="email_title">Email</h2>-->
-<!--            <span id="email_display"></span>-->
-<!--          </li>-->
-        </ul>
-      </section>
     </aside>
     <aside class="right" id="right" test-id="resume-main-article">
 <!--      <h1 class="title" id="title"></h1>-->
