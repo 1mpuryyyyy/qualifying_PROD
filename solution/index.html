@@ -29,9 +29,9 @@
       </div>
       <div>
         <label for="telephone">Телефон:</label>
-        <input type="number" id="telephone" test-id="personal-info" name="telephone"
-               placeholder="+7(977)777-77-77"
-               minlength=10 maxlength=10 />
+        <input type="text" id="telephone" test-id="personal-info" name="telephone"
+               placeholder="+7 (977) 777-77-77"
+               minlength=10 maxlength=18 />
       </div>
       <div>
         <label for="email">Email:</label>
@@ -133,7 +133,7 @@
       <div class="br"></div>
 
       <div>
-        <button type="submit" id="submit" test-id="generate-resume">Сохранить и просмотреть</button>
+        <button type="submit" id="submit" test-id="generate-resume" disabled>Сохранить и просмотреть</button>
       </div>
     </form>
   </div>
@@ -141,53 +141,52 @@
 <main id="div_resume">
   <h1>Просмотрите свое резюме</h1>
   <div class="container resume-page" id="resume" test-id="resume-main-content">
-    <aside class="left" test-id="resume-main-article">
-      <img alt="" class="avatar" src="/solution/images/photo.jpg"/>
-      <section class="left__section left__section--personal-data" test-id="resume-main-section">
-        <h2 class="left__section__title">Личные данные</h2>
-        <ul class="personal-groups">
-          <h2 class="left__section__fem">ФИО</h2>
-          <li class="personal-group" id="name-display"></li>
-          <h2 class="left__section__fem" id="date_birth">Дата рождения</h2>
-          <li class="personal-group" id="birth-display"></li>
-          <h2 class="left__section__fem" id="town_title">Город</h2>
-          <li class="personal-group" id="town-display"></li>
-          <h2 class="left__section__fem" id="telephone_title">Номер телефона</h2>
-          <li class="personal-group" id="telephone-display"></li>
-          <h2 class="left__section__fem" id="email_title">Email</h2>
-          <li class="personal-group" id="email-display"></li>
-
+    <aside class="left" test-id="resume-main-article" id="left-aside">
+<!--      <img class="avatar" src="/solution/images/photo.jpg"/>-->
+<!--      <section class="left__section left__section&#45;&#45;personal-data" id="section-personal-data" test-id="resume-main-section">-->
+<!--        <h2 class="left__section__title">Личные данные</h2>-->
+<!--        <ul class="personal-groups" id="personal_groups">-->
+<!--          <li class="personal-group" id="name-display">-->
+<!--            <h2 class="left__section__fem">ФИО</h2>-->
+<!--            <span id="name_display"></span>-->
+<!--          </li>-->
+<!--          <li class="personal-group" id="birth-display">-->
+<!--            <h2 class="left__section__fem" id="date_birth">Дата рождения</h2>-->
+<!--            <span id="birth_display"></span>-->
+<!--          </li>-->
+<!--          <li class="personal-group" id="town-display">-->
+<!--            <h2 class="left__section__fem" id="town_title">Город</h2>-->
+<!--            <span id="town_display"></span>-->
+<!--          </li>-->
+<!--          <li class="personal-group" id="telephone-display">-->
+<!--            <h2 class="left__section__fem" id="telephone_title">Номер телефона</h2>-->
+<!--            <span id="telephone_display"></span>-->
+<!--          </li>-->
+<!--          <li class="personal-group" id="email-display">-->
+<!--            <h2 class="left__section__fem" id="email_title">Email</h2>-->
+<!--            <span id="email_display"></span>-->
+<!--          </li>-->
         </ul>
-      </section>
-      <section class="left__section left__section--interests" test-id="resume-main-section" id="interests">
-        <h2 class="left__section__title" id="summary_title">Интересы</h2>
-        <ul class="interest" id="summary-display">
-        </ul>
-      </section>
-      <section class="left__section left__section--languages" test-id="resume-main-section" id="languages">
-        <h2 class="left__section__title" id="languages_title">Языки</h2>
-        <ul class="languages" id="languages-display"></ul>
-        <ul class='languages' id="levels-display"></ul>
       </section>
     </aside>
     <aside class="right" id="right" test-id="resume-main-article">
-      <h1 class="title" id="title"></h1>
-      <p class='about' id="about-display"></p>
-      <section class="right__section right__section--experience" id="experience_section">
-        <h2 class="right__section__title" id="experience_title">Опыт работы</h2>
-        <ul class="right__group-big" id="experience-display">
-        </ul>
-      </section>
-      <section class="right__section right__section--education" test-id="resume-main-section" id="education_section">
-        <h2 class="right__section__title" id="education_title">
-          Образование и квалификация
-        </h2>
-        <ul class="right__group-big" id="education-display"></ul>
-      </section>
-      <section class="right__section right__section--courses" test-id="resume-main-section" id="course_section">
-        <h2 class="right__section__title" id="course_title">Курсы</h2>
-        <ul class="right__group-small" id="course-display"></ul>
-      </section>
+<!--      <h1 class="title" id="title"></h1>-->
+<!--      <p class='about' id="about-display"></p>-->
+<!--      <section class="right__section right__section&#45;&#45;experience" id="experience_section">-->
+<!--        <h2 class="right__section__title" id="experience_title">Опыт работы</h2>-->
+<!--        <ul class="right__group-big" id="experience-display">-->
+<!--        </ul>-->
+<!--      </section>-->
+<!--      <section class="right__section right__section&#45;&#45;education" test-id="resume-main-section" id="education_section">-->
+<!--        <h2 class="right__section__title" id="education_title">-->
+<!--          Образование и квалификация-->
+<!--        </h2>-->
+<!--        <ul class="right__group-big" id="education-display"></ul>-->
+<!--      </section>-->
+<!--      <section class="right__section right__section&#45;&#45;courses" test-id="resume-main-section" id="course_section">-->
+<!--        <h2 class="right__section__title" id="course_title">Курсы</h2>-->
+<!--        <ul class="right__group-small" id="course-display"></ul>-->
+<!--      </section>-->
 
     </aside>
   </div>
