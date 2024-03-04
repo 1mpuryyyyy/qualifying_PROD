@@ -140,8 +140,4 @@ canselButton.addEventListener('click', function () {
   copyDiv.style.display = 'none';
 });
 
-function Copy(data) {
-  localStorage.setItem('copiedResumeData', JSON.stringify(data));
-  window.location.href = 'index.html';
-}
 
