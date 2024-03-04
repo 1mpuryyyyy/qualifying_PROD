@@ -1,8 +1,10 @@
 const formData = {}
-if (JSON.parse(localStorage.getItem('copiedResumeData'))){
-  loadFormData(JSON.parse(localStorage.getItem('copiedResumeData')));
+if (JSON.parse(localStorage.getItem('copiedResumeData'))) {
+  let dataToLoad = JSON.parse(localStorage.getItem('copiedResumeData'))
+  loadFormData(dataToLoad);
   localStorage.removeItem('copiedResumeData');
 }
+
 function saveFormData() {
   formData.nameResume = document.getElementById('name_resume').value;
   formData.name = document.getElementById("name").value;
@@ -125,7 +127,7 @@ function saveFormData() {
 
 // Функция для загрузки данных формы из local storage
 function loadFormData(formdata) {
-  document.getElementById("name_resume").value = formdata.nameResume;
+  document.getElementById("name_resume").value = formdata.nameResume || formdata.name;
   document.getElementById("name").value = formdata.name;
   if (!name || name.value !== '') {
     document.getElementById('submit').removeAttribute('disabled');
@@ -732,13 +734,11 @@ function getAllFormValues() {
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key.startsWith('dict_1')) {
-      const valueString = localStorage.getItem(JSON.stringify(key));
-      console.log(valueString);
-      allFormValues[key] = valueString;
+    if (key.startsWith('dict_')) {
+      let valueString = localStorage.getItem(key);
+      allFormValues[key] = JSON.parse(valueString);
     }
   }
-
   return allFormValues;
 }
 
@@ -750,14 +750,16 @@ function createFormId() {
 
   const latestFormKey = formKeys[formKeys.length - 1];
   const latestFormIndex = parseInt(latestFormKey.split('_')[1]);
+  console.log(formKeys)
+  console.log(latestFormKey)
+  console.log(latestFormIndex)
   return `dict_${latestFormIndex + 1}`;
 }
 
 function saveFormDataToLocalStorage(formData) {
-  const formId = createFormId();
-  const dataToSave = formData;
-  console.log(dataToSave);
-  localStorage.setItem(formId, JSON.stringify(dataToSave));
+    const formId = createFormId();
+    const dataToSave = JSON.stringify(formData);
+    localStorage.setItem(formId, dataToSave);
 }
 
 const saveResume = document.getElementById('save');
@@ -767,9 +769,9 @@ saveResume.addEventListener('click', function () {
 })
 
 const urlParams = new URLSearchParams(window.location.search);
-const formdata = JSON.parse(urlParams.get('value'));
-if (formdata) {
-  loadFormData(formdata);
+const openData = JSON.parse(urlParams.get('value'));
+if (openData) {
+  loadFormData(openData);
   const submitButton = document.getElementById('submit');
   submitButton.click();
 }

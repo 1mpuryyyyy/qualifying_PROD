@@ -10,8 +10,10 @@ for (let i = 0; i < localStorage.length; i++) {
     deleteCheckboxButton.classList.add('deleteCheckboxes');
     deleteCheckboxButton.addEventListener('click', function () {
       const checkedCheckboxList = document.querySelectorAll('input[type="checkbox"]:checked');
+      console.log(checkedCheckboxList);
       checkedCheckboxList.forEach(checkbox => {
-        localStorage.removeItem(`dict_${checkbox.id}`)
+        localStorage.removeItem(`${checkbox.id}`);
+        location.reload();
       })
     });
     const li = document.createElement('li');
@@ -20,7 +22,7 @@ for (let i = 0; i < localStorage.length; i++) {
     const checkbox = document.createElement("input")
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('test-id', "resume-checkbox");
-    checkbox.id = `checkbox${i}`;
+    checkbox.id = `${key}`;
     checkbox.addEventListener('change', function () {
       const deleteCheckboxes = document.getElementById('deleteCheckboxes');
       const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -46,6 +48,7 @@ for (let i = 0; i < localStorage.length; i++) {
     cardButton.innerText = 'Действия';
     cardButton.setAttribute('title', 'Действия');
     cardButton.setAttribute('test-id', "resume-actions");
+
     const div = document.createElement('div');
     div.classList.add('dropdownMenu');
     div.id = `dropdownMenu${i}`
@@ -76,7 +79,30 @@ for (let i = 0; i < localStorage.length; i++) {
     copy.setAttribute('test-id', 'resume-actions__copy');
     copy.innerText = 'Копировать'
     let resumeData = JSON.parse(localStorage.getItem(key));
-    document.getElementById('copy').addEventListener('click', function () {
+
+    const DivForCopyLocal = document.getElementById('flex_div_actions');
+
+    copy.addEventListener('click', function () {
+      const canselButton = document.createElement('button');
+      canselButton.innerText = 'Отмена';
+      canselButton.setAttribute('test-id', 'copy-modal__cancel');
+
+      canselButton.addEventListener('click', function () {
+        const copyDiv = document.getElementById('copyDiv');
+        copyDiv.style.display = 'none';
+        DivForCopyLocal.innerHTML = ''
+      });
+
+      const localCopyDiv = document.createElement('button');
+      localCopyDiv.setAttribute('test-id', 'copy-modal__copy');
+      localCopyDiv.innerText = 'Копировать';
+
+      if (DivForCopyLocal.childElementCount < 2) {
+        DivForCopyLocal.appendChild(localCopyDiv);
+        DivForCopyLocal.appendChild(canselButton);
+      }
+
+      localCopyDiv.addEventListener('click', function () {
         const formDataToCopy = {};
         const submitCopyCheckboxes = document.querySelectorAll('#copyDiv input[type="checkbox"]:checked');
         submitCopyCheckboxes.forEach(checkbox => {
@@ -103,10 +129,15 @@ for (let i = 0; i < localStorage.length; i++) {
         });
         if (Object.keys(formDataToCopy).length > 0) {
           localStorage.setItem('copiedResumeData', JSON.stringify(formDataToCopy));
+          DivForCopyLocal.innerHTML = ''
           window.location.href = 'index.html';
         }
-      }
-    )
+      });
+
+      const copyDiv = document.getElementById('copyDiv');
+      copyDiv.style.display = 'block';
+    })
+
     div.appendChild(del);
     div.appendChild(open);
     div.appendChild(copy);
@@ -132,10 +163,6 @@ copyPartButton.addEventListener('click', function () {
   copyDiv.style.display = 'block';
 })
 
-const canselButton = document.getElementById('cansel');
-canselButton.addEventListener('click', function () {
-  const copyDiv = document.getElementById('copyDiv');
-  copyDiv.style.display = 'none';
-});
+
 
 
