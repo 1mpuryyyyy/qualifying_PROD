@@ -3,7 +3,6 @@ const sectionList = document.getElementById('section_list');
 for (let i = 0; i < localStorage.length; i++) {
   const key = localStorage.key(i);
   if (key.startsWith('dict_')) {
-    console.log(JSON.parse(localStorage.getItem(key)))
     const deleteCheckboxButton = document.createElement('button');
     deleteCheckboxButton.innerText = 'Удалить выбранные'
     deleteCheckboxButton.setAttribute('test-id', "delete-resumes")
@@ -39,7 +38,6 @@ for (let i = 0; i < localStorage.length; i++) {
     if (JSON.parse(localStorage.getItem(key)).nameResume !== '') {
       h3.innerText = JSON.parse(localStorage.getItem(key)).nameResume;
     } else {
-      console.log(JSON.parse(localStorage.getItem(key)).nameResume);
       h3.innerText = `${JSON.parse(localStorage.getItem(key)).name}`;
     }
 

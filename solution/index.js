@@ -515,7 +515,6 @@ function displayResumeData() {
     ulCourses.id = 'course-display';
 
     coursesData.forEach(course => {
-      console.log(course);
       if (course.courseName !== '') {
         let div = document.createElement('div');
         div.classList.add('right__group__title');
