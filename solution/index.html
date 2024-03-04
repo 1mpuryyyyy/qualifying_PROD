@@ -7,7 +7,10 @@
 </head>
 <body>
 <div class="build" id="build">
-  <h1 test-id="resume-form-title">Конструктор резюме</h1>
+  <div id="nameResume">
+    <h1 class='nameResume' test-id="resume-form-title">Конструктор резюме</h1>
+  </div>
+
   <div test-id="resume-builder">
     <form id="resume-form">
       <div>
@@ -35,7 +38,7 @@
         <label for="telephone">Телефон:</label>
         <input type="text" id="telephone" test-id="personal-info" name="telephone"
                placeholder="+7 (977) 777-77-77"
-               minlength=10 maxlength=18 />
+               minlength=10 maxlength=18/>
       </div>
       <div>
         <label for="email">Email:</label>
@@ -99,15 +102,19 @@
           <input type="text" id="education" test-id="education-title" name="education" placeholder="Высшее образование">
           <label for="start_education">
             Дата начала:
-            <input type="date" id="start_education" test-id="education-date-start" name="start_education" placeholder="Дата начала обучения">
+            <input type="date" id="start_education" test-id="education-date-start" name="start_education"
+                   placeholder="Дата начала обучения">
           </label>
 
           <label for="end_education">
             Дата окончания:
-            <input type="date" id="end_education" test-id="education-date-end" name="end_education" placeholder="Дата окончания обучения">
+            <input type="date" id="end_education" test-id="education-date-end" name="end_education"
+                   placeholder="Дата окончания обучения">
           </label>
-          <input type="text" id="place_education" test-id="education-place"name="place_education" placeholder="Организация">
-          <textarea id="about_education" test-id="education-description" placeholder="Расскажите о своем обучении"></textarea>
+          <input type="text" id="place_education" test-id="education-place" name="place_education"
+                 placeholder="Организация">
+          <textarea id="about_education" test-id="education-description"
+                    placeholder="Расскажите о своем обучении"></textarea>
         </div>
         <button id="create_education" test-id="add-education">+</button>
         <button class="delete_set_divs" test-id="remove-education">-</button>
@@ -121,12 +128,14 @@
           <input type="text" id="name_course" test-id="course-title" name="name_course" placeholder="Название курса">
           <label for="start_course">
             Дата начала:
-            <input type="date" id="start_course" test-id="course-date-start" name="start_course" placeholder="Дата начала обучения">
+            <input type="date" id="start_course" test-id="course-date-start" name="start_course"
+                   placeholder="Дата начала обучения">
           </label>
 
           <label for="end_course">
             Дата окончания:
-            <input type="date" id="end_course" test-id="course-date-end" name="end_course" placeholder="Дата окончания обучения">
+            <input type="date" id="end_course" test-id="course-date-end" name="end_course"
+                   placeholder="Дата окончания обучения">
           </label>
           <input type="text" id="name_author" test-id="course-place" name="name_author" placeholder="Автор курса">
         </div>
@@ -148,23 +157,23 @@
     <aside class="left" test-id="resume-main-article" id="left-aside">
     </aside>
     <aside class="right" id="right" test-id="resume-main-article">
-<!--      <h1 class="title" id="title"></h1>-->
-<!--      <p class='about' id="about-display"></p>-->
-<!--      <section class="right__section right__section&#45;&#45;experience" id="experience_section">-->
-<!--        <h2 class="right__section__title" id="experience_title">Опыт работы</h2>-->
-<!--        <ul class="right__group-big" id="experience-display">-->
-<!--        </ul>-->
-<!--      </section>-->
-<!--      <section class="right__section right__section&#45;&#45;education" test-id="resume-main-section" id="education_section">-->
-<!--        <h2 class="right__section__title" id="education_title">-->
-<!--          Образование и квалификация-->
-<!--        </h2>-->
-<!--        <ul class="right__group-big" id="education-display"></ul>-->
-<!--      </section>-->
-<!--      <section class="right__section right__section&#45;&#45;courses" test-id="resume-main-section" id="course_section">-->
-<!--        <h2 class="right__section__title" id="course_title">Курсы</h2>-->
-<!--        <ul class="right__group-small" id="course-display"></ul>-->
-<!--      </section>-->
+      <!--      <h1 class="title" id="title"></h1>-->
+      <!--      <p class='about' id="about-display"></p>-->
+      <!--      <section class="right__section right__section&#45;&#45;experience" id="experience_section">-->
+      <!--        <h2 class="right__section__title" id="experience_title">Опыт работы</h2>-->
+      <!--        <ul class="right__group-big" id="experience-display">-->
+      <!--        </ul>-->
+      <!--      </section>-->
+      <!--      <section class="right__section right__section&#45;&#45;education" test-id="resume-main-section" id="education_section">-->
+      <!--        <h2 class="right__section__title" id="education_title">-->
+      <!--          Образование и квалификация-->
+      <!--        </h2>-->
+      <!--        <ul class="right__group-big" id="education-display"></ul>-->
+      <!--      </section>-->
+      <!--      <section class="right__section right__section&#45;&#45;courses" test-id="resume-main-section" id="course_section">-->
+      <!--        <h2 class="right__section__title" id="course_title">Курсы</h2>-->
+      <!--        <ul class="right__group-small" id="course-display"></ul>-->
+      <!--      </section>-->
 
     </aside>
   </div>

@@ -1,6 +1,10 @@
-// Функция для сохранения данных формы в local storage
 const formData = {}
+if (JSON.parse(localStorage.getItem('copiedResumeData'))){
+  loadFormData(JSON.parse(localStorage.getItem('copiedResumeData')));
+  localStorage.removeItem('copiedResumeData');
+}
 function saveFormData() {
+  formData.nameResume = document.getElementById('name_resume').value;
   formData.name = document.getElementById("name").value;
   formData.birth = document.getElementById('birth').value;
   formData.town = document.getElementById('town').value;
@@ -80,7 +84,7 @@ function saveFormData() {
       education.push(educationData);
     }
   });
-    formData.education = education
+  formData.education = education
 
   let courses = [];
 
@@ -103,7 +107,7 @@ function saveFormData() {
     }
   });
 
-  formData.courses =  courses;
+  formData.courses = courses;
   // Сохраняем значения элементов формы в local storage с ключами, соответствующими их id
   localStorage.setItem("name", formData.name);
   localStorage.setItem("birth", formData.birth);
@@ -111,7 +115,6 @@ function saveFormData() {
   localStorage.setItem("email", formData.email);
   localStorage.setItem("telephone", formData.telephone);
   localStorage.setItem("summary", JSON.stringify(formData.summary));
-  console.log(formData.summary)
   localStorage.setItem('about', formData.about);
   localStorage.setItem("languages", JSON.stringify(formData.languages));
   localStorage.setItem("education", JSON.stringify(formData.education));
@@ -121,29 +124,73 @@ function saveFormData() {
 }
 
 // Функция для загрузки данных формы из local storage
-// function loadFormData() {
-//   // Получаем элементы формы по их id
-let name = document.getElementById("name");
-let birth = document.getElementById('birth');
-let town = document.getElementById('town');
-let email = document.getElementById("email");
-let telephone = document.getElementById("telephone");
-let about = document.getElementById('about');
+function loadFormData(formdata) {
+  document.getElementById("name_resume").value = formdata.nameResume;
+  document.getElementById("name").value = formdata.name;
+  if (!name || name.value !== '') {
+    document.getElementById('submit').removeAttribute('disabled');
+  } else {
+    document.getElementById('submit').setAttribute('disabled', true);
+  }
+  if (formdata.birth !== '' && formdata.birth) {
+    document.getElementById("birth").value = formdata.birth;
+  }
+  if (formdata.town) {
+    document.getElementById("town").value = formdata.town;
+  }
+  if (formdata.email) {
+    document.getElementById("email").value = formdata.email;
+  }
+  if (formdata.telephone) {
+    document.getElementById("telephone").value = formdata.telephone;
+  }
+  if (formdata.summary) {
+    document.getElementById("summary").value = formdata.summary.join(", ");
+  }
+  if (formdata.about) {
+    document.getElementById("about").value = formdata.about;
+  }
 
-// Загружаем значения элементов формы из local storage с ключами, соответствующими их id
-name.value = localStorage.getItem("name");
-if (!name || name.value !== '') {
-  document.getElementById('submit').removeAttribute('disabled');
-} else {
-  document.getElementById('submit').setAttribute('disabled', true);
+  if (formdata.languages) {
+    const languages = formdata.languages;
+    for (let i = 0; i < languages.length; i++) {
+      document.getElementById(`language_${i + 1}`).value = languages[i][0];
+      document.getElementById(`level_${i + 1}`).value = languages[i][1];
+    }
+  }
+
+  if (formdata.workExperience) {
+    const workExperience = formdata.workExperience;
+    for (let i = 0; i < workExperience.length; i++) {
+      document.getElementById(`company_${i + 1}`).value = workExperience[i].companyName;
+      document.getElementById(`position_${i + 1}`).value = workExperience[i].jobPosition;
+      document.getElementById(`start_work_${i + 1}`).value = workExperience[i].startDate;
+      document.getElementById(`end_work_${i + 1}`).value = workExperience[i].endDate || "";
+      document.getElementById(`work_description_${i + 1}`).value = workExperience[i].jobDescription;
+    }
+  }
+
+  if (formdata.education) {
+    const education = formdata.education;
+    for (let i = 0; i < education.length; i++) {
+      document.getElementById(`education_name_${i + 1}`).value = education[i].educationName;
+      document.getElementById(`start_education_${i + 1}`).value = education[i].startDate;
+      document.getElementById(`end_education_${i + 1}`).value = education[i].endDate || "";
+      document.getElementById(`education_place_${i + 1}`).value = education[i].placeEducation;
+      document.getElementById(`education_description_${i + 1}`).value = education[i].educationDescription;
+    }
+  }
+
+  if (formdata.courses) {
+    const courses = formdata.courses;
+    for (let i = 0; i < courses.length; i++) {
+      document.getElementById(`course_name_${i + 1}`).value = courses[i].courseName;
+      document.getElementById(`course_start_date_${i + 1}`).value = courses[i].startDate;
+      document.getElementById(`course_end_date_${i + 1}`).value = courses[i].endDate || "";
+      document.getElementById(`course_author_${i + 1}`).value = courses[i].authorCourse;
+    }
+  }
 }
-birth.value = localStorage.getItem('birth');
-town.value = localStorage.getItem('town');
-email.value = localStorage.getItem("email");
-telephone.value = localStorage.getItem("telephone");
-about.value = localStorage.getItem('about')
-
-// }
 
 // Функция для отображения данных резюме
 function displayResumeData() {
@@ -365,7 +412,6 @@ function displayResumeData() {
     ulExperience.id = 'experience-display';
 
     workExperienceData.forEach(experience => {
-      console.log(experience);
       if (experience.jobPosition !== '') {
         let div = document.createElement('div');
         div.classList.add('right__group__title');
@@ -417,7 +463,6 @@ function displayResumeData() {
     ulEducation.id = 'education-display';
 
     educationData.forEach(education => {
-      console.log(education);
       if (education.jobPosition !== '') {
         let div = document.createElement('div');
         div.classList.add('right__group__title');
@@ -688,9 +733,10 @@ function getAllFormValues() {
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key.startsWith('dict_')) {
-      const valueString = localStorage.getItem(key);
-      allFormValues[key] = JSON.parse(valueString);
+    if (key.startsWith('dict_1')) {
+      const valueString = localStorage.getItem(JSON.stringify(key));
+      console.log(valueString);
+      allFormValues[key] = valueString;
     }
   }
 
@@ -705,28 +751,27 @@ function createFormId() {
 
   const latestFormKey = formKeys[formKeys.length - 1];
   const latestFormIndex = parseInt(latestFormKey.split('_')[1]);
-
   return `dict_${latestFormIndex + 1}`;
 }
 
 function saveFormDataToLocalStorage(formData) {
   const formId = createFormId();
-  const dataToSave = JSON.stringify(formData);
-  localStorage.setItem(formId, dataToSave);
-}
-
-function getFormValuesById(formId) {
-  const valueString = localStorage.getItem(formId);
-  if (!valueString) {
-    return null;
-  }
-
-  return JSON.parse(valueString);
+  const dataToSave = formData;
+  console.log(dataToSave);
+  localStorage.setItem(formId, JSON.stringify(dataToSave));
 }
 
 const saveResume = document.getElementById('save');
 saveResume.addEventListener('click', function () {
-
   saveFormDataToLocalStorage(formData);
-  // location.href='index.html';
+  window.location.href = 'all.html'
 })
+
+const urlParams = new URLSearchParams(window.location.search);
+const formdata = JSON.parse(urlParams.get('value'));
+if (formdata) {
+  loadFormData(formdata);
+  const submitButton = document.getElementById('submit');
+  submitButton.click();
+}
+

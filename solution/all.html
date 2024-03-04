@@ -6,15 +6,37 @@
   <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
-  <div class="nav_list_resumes">
-    <h1>Мои резюме</h1>
-      <button id="add_resume">+</button>
+<div class="nav_list_resumes">
+  <h1>Мои резюме</h1>
+  <div>
+    <button id="add_resume" title="Добавить" test-id="add-resume">+</button>
   </div>
-  <section>
-    <ul id="list_resumes">
+</div>
+<section id="section_list">
+  <ul id="list_resumes">
 
-    </ul>
-  </section>
+  </ul>
+</section>
+<div class="copyDiv" id="copyDiv">
+  <input type="checkbox" id="personalData" test-id="copy-modal__checkbox">
+  <label for="personalData">Личные данные</label>
+  <input type="checkbox" id="about" test-id="copy-modal__checkbox">
+  <label for="about">О себе</label>
+  <input type="checkbox" id="interests" test-id="copy-modal__checkbox">
+  <label for="interests">Интересы</label>
+  <input type="checkbox" id="languages" test-id="copy-modal__checkbox">
+  <label for="languages">Языки</label>
+  <input type="checkbox" id="workExperience" test-id="copy-modal__checkbox">
+  <label for="workExperience">Опыт работы</label>
+  <input type="checkbox" id="education" test-id="copy-modal__checkbox">
+  <label for="education">Образование</label>
+  <input type="checkbox" id="courses" test-id="copy-modal__checkbox">
+  <label for="courses">Курсы</label>
+  <div class="flex">
+    <button id="copy" test-id="copy-modal__copy">Копировать</button>
+    <button id="cansel" test-id="copy-modal__cancel">Отмена</button>
+  </div>
+</div>
 </body>
 <script src="all.js"></script>
 </html>
