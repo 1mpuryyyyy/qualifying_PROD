@@ -750,16 +750,18 @@ function createFormId() {
 
   const latestFormKey = formKeys[formKeys.length - 1];
   const latestFormIndex = parseInt(latestFormKey.split('_')[1]);
-  console.log(formKeys)
-  console.log(latestFormKey)
-  console.log(latestFormIndex)
   return `dict_${latestFormIndex + 1}`;
 }
 
 function saveFormDataToLocalStorage(formData) {
-    const formId = createFormId();
-    const dataToSave = JSON.stringify(formData);
-    localStorage.setItem(formId, dataToSave);
+  const formId = createFormId();
+  const dataToSave = formData;
+  dataToSave.id = formId.split('dict_').join('');
+  if ((dataToSave.id - 1).toString() !== JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id) {
+    console.log(dataToSave.id - 1, JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id, `dict_${dataToSave.id}`)
+    localStorage.setItem(formId, JSON.stringify(dataToSave));
+  }
+
 }
 
 const saveResume = document.getElementById('save');
