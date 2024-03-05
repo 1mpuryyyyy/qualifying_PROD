@@ -162,7 +162,3 @@ copyPartButton.addEventListener('click', function () {
   const copyDiv = document.getElementById('copyDiv');
   copyDiv.style.display = 'block';
 })
-
-
-
-

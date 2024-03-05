@@ -757,8 +757,9 @@ function saveFormDataToLocalStorage(formData) {
   const formId = createFormId();
   const dataToSave = formData;
   dataToSave.id = formId.split('dict_').join('');
-  if ((dataToSave.id - 1).toString() !== JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id) {
-    console.log(dataToSave.id - 1, JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id, `dict_${dataToSave.id}`)
+  console.log((dataToSave.id - 1), JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id + 1)
+  if ((dataToSave.id - 1).toString() !== JSON.parse(localStorage.getItem(`dict_${dataToSave.id - 1}`)).id + 1) {
+
     localStorage.setItem(formId, JSON.stringify(dataToSave));
   }
 
@@ -767,7 +768,7 @@ function saveFormDataToLocalStorage(formData) {
 const saveResume = document.getElementById('save');
 saveResume.addEventListener('click', function () {
   saveFormDataToLocalStorage(formData);
-  window.location.href = 'all.html'
+  // window.location.href = 'all.html'
 })
 
 const urlParams = new URLSearchParams(window.location.search);
